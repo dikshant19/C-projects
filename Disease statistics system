@@ -1,0 +1,256 @@
+#include<stdio.h>
+#include<conio.h>
+#include<stdlib.h>
+#include<string.h>
+int main();
+void linklst();
+struct d{
+ char name[200];
+ int age;
+ char inf;
+ char area[200];
+ char gender;
+}a;
+struct node{
+ struct d data;
+ struct node *next;
+}*nn,*start,*p;
+void formin()
+{
+ char c;
+ int ag;
+// clrscr();
+ printf("Name: ");
+ fflush(stdin);
+ gets(a.name);
+ gen:
+ printf("Gender(M/F): ");
+ scanf("%c",&c);
+ if(c=='m'||c=='f'||c=='M'||c=='F')
+  {
+   a.gender=c;
+  }
+ else
+  {
+   printf("Invalid Entry!\n");
+   getch();
+   fflush(stdin);
+   goto gen;
+  }
+ age:
+ printf("Age: ");
+ fflush(stdin);
+ scanf("%d",&ag);
+ if(ag>0&&ag<110)
+  {
+   a.age=ag;
+  }
+ else
+  {
+   printf("Invalid Entry!\n");
+   getch();
+   goto age;
+  }
+ printf("Area living in: ");
+ fflush(stdin);
+ gets(a.area);
+ inf:
+ printf("Infected(Y/N): ");
+ fflush(stdin);
+ scanf("%c",&c);
+ if(c=='n'||c=='y'||c=='Y'||c=='N')
+  {
+   a.inf=c;
+  }
+ else
+  {
+   printf("Invalid Entry!\n");
+   getch();
+   goto inf;
+  }
+}
+void tof()
+{
+ FILE *fp;
+ int c,c1;
+ fp=fopen("entry.txt","a");
+ fwrite(&a,sizeof(struct d),1,fp);
+ fclose(fp);
+ printf("Enter <- arrow key to go back.");
+ c=getch();
+ c1=getch();
+ if(c==0&&c1==75)
+  int main();
+}
+void disp()
+{
+ int c,c1;
+// clrscr();
+ p=start;
+ do
+ {
+  printf("Name: %s\nGender: %c\nAge: %d\nArea: ",p->data.name,p->data.gender,p->data.age);
+  puts(p->data.area);
+  printf("Infection: %c\n\n",p->data.inf);
+  p=p->next;
+ } while(p!=start);
+ printf("Enter <- arrow key to go back.");
+ c=getch();
+ c1=getch();
+ if(c==0&&c1==75)
+int  main();
+}
+void linklst()
+{
+ FILE *fp;
+ start=NULL;
+ fp=fopen("entry.txt","r");
+ while(fread(&a,sizeof(struct d),1,fp))
+  {
+   nn=(struct node*)malloc(sizeof(struct node));
+   nn->data=a;
+   if(start==NULL)
+    start=nn;
+   else
+    p->next=nn;
+   nn->next=start;
+   p=nn;
+  }
+ fclose(fp);
+}
+void search()
+{
+ int i,a1,a2;
+ char n[200],g,g2;
+// clrscr();
+ printf("1.Name\n2.Age range\n3.Gender\n4.Area\n5.Infection\nEnter choice: ");
+ scanf("%d",&i);
+ switch(i)
+ {
+  case 1:
+   printf("Enter name: ");
+   fflush(stdin);
+   gets(n);
+   p=start;
+   do{
+    if(strcmp(p->data.name,n)==0)
+     {printf("\nName: %s\nGender: %c\nAge: %d\nArea: ",p->data.name,p->data.gender,p->data.age);
+     puts(p->data.area);
+     printf("Infection: %c\n",p->data.inf);}
+    p=p->next;
+   }while(p!=start);
+  break;
+  case 2:
+   printf("Enter range (xx-xx): ");
+   scanf("%d-%d",&a1,&a2);
+   p=start;
+   do{
+    if(p->data.age>=a1&&p->data.age<=a2)
+     {printf("\nName: %s\nGender: %c\nAge: %d\nArea: ",p->data.name,p->data.gender,p->data.age);
+     puts(p->data.area);
+     printf("Infection: %c\n",p->data.inf);}
+    p=p->next;
+   }while(p!=start);
+  break;
+  case 3:
+   printf("Enter Gender(M/F): ");
+   fflush(stdin);
+   scanf("%c",&g);
+   if(g=='M')
+    g2='m';
+   if(g=='F')
+    g2='f';
+   if(g=='m')
+    g2='M';
+   if(g=='f')
+    g2='F';
+   p=start;
+   do{
+    if(p->data.gender==g||p->data.gender==g2)
+     {printf("Name: %s\nGender: %c\nAge: %d\nArea: ",p->data.name,p->data.gender,p->data.age);
+     puts(p->data.area);
+     printf("Infection: %c\n\n",p->data.inf);}
+    p=p->next;
+   }while(p!=start);
+  break;
+  case 4:
+   printf("Enter area: ");
+   fflush(stdin);
+   gets(n);
+   p=start;
+   do{
+    if(strcmp(p->data.area,n)==0)
+     {printf("\nName: %s\nGender: %c\nAge: %d\nArea: ",p->data.name,p->data.gender,p->data.age);
+     puts(p->data.area);
+     printf("Infection: %c\n",p->data.inf);}
+    p=p->next;
+   }while(p!=start);
+  break;
+  case 5:
+   printf("Enter Y/N: ");
+   fflush(stdin);
+   scanf("%c",&g);
+   if(g=='Y')
+    g2='y';
+   if(g=='N')
+    g2='n';
+   if(g=='n')
+    g2='N';
+   if(g=='y')
+    g2='Y';
+   p=start;
+   do{
+    if(p->data.inf==g||p->data.inf==g2)
+     {printf("\nName: %s\nGender: %c\nAge: %d\nArea: ",p->data.name,p->data.gender,p->data.age);
+     puts(p->data.area);
+     printf("Infection: %c\n",p->data.inf);}
+    p=p->next;
+   }while(p!=start);
+  break;
+  default:
+   printf("Invalid entry!");
+ }
+ printf("\nEnter <- arrow key to go back.");
+ g=getch();
+ g2=getch();
+ if(g==0&&g2==75)
+int   main();
+}
+void stats()
+{
+
+}
+int main()
+{
+ int n;
+// clrscr();
+ linklst();
+ while(n!=5)
+ {
+ printf("1. New entry\n2. Display exsisting entries\n3. Search entry\n4. Stats and results\n5. Exit\nEnter choice: ");
+ scanf("%d",&n);
+ switch(n)
+ {
+  case 1:
+   formin();
+   tof();
+   break;
+  case 2:
+   disp();
+   break;
+  case 3:
+   search();
+   break;
+  case 4:
+   //stats();
+   break;
+  case 5:
+   exit(1);
+   break;
+  default:
+   printf("Invalid entry!");
+   getch();
+//   clrscr();
+ }}
+ getch();
+}
