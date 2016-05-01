@@ -12,7 +12,6 @@ FILE *fp1,*fp2,*fp;
    void main()
 {
  do {
-  clrscr();
   printf("\n\t\t      TEXT EDITOR      ");
   printf("\n\tMENU:\t ");
   printf("\n\t1.CREATE\n\t2.DISPLAY\n\t3.APPEND\n\t4.DELETE\n\t5.EXIT\n");
@@ -79,7 +78,7 @@ void Display()
 end1:
   fclose(fp1);
   printf("\n\n\tPress any key to continue...");
-  getch();
+
 }
 void Delete()
 {
@@ -100,7 +99,7 @@ void Delete()
   else
    printf("\n\tError!\n");
 end2: printf("\n\n\tPress any key to continue...");
-  getch();
+
 }
 void Append()
 {
@@ -138,5 +137,4 @@ void Append()
    }
   }
 end3: fclose(fp1);
-  getch();
 }
