@@ -1,0 +1,134 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node
+{
+    int Data;
+    struct Node *next;
+}*top,*start;
+int count()
+{
+    struct Node *temp = top;
+    int length = 0;
+    while(temp!=NULL)
+    {
+        length++;
+        temp=temp->next;
+    }
+return(length);
+}
+void popStack()
+{
+    struct Node *temp, *var=top;
+    if(var==top)
+    {
+        top = top->next;
+        free(var);
+    }
+    else
+    printf("\nList is Empty");
+}
+void popStack2(int p)
+{
+    struct Node*temp1= top;
+    int i;
+    for(i=0;i<p-2;i++)
+        temp1=temp1->next;
+     struct Node* temp2=temp1->next;
+    temp1->next=temp2->next;
+    free(temp2);
+}
+
+void push(int value)
+{
+    struct Node *temp;
+    temp=(struct Node *)malloc(sizeof(struct Node));
+    temp->Data=value;
+    if (top == NULL)
+    {
+         top=temp;
+         start=temp;
+         top->next=NULL;
+    }
+    else
+    {
+        temp->next=top;
+        top=temp;
+    }
+}
+
+void display()
+{
+     struct Node *var=top;
+     if(var!=NULL)
+     {
+          printf("\nElements are as:\n");
+          while(var!=NULL)
+          {
+               printf("\t%d\n",var->Data);
+               var=var->next;
+          }
+     printf("\n");
+     }
+     else
+     printf("\nList is Empty");
+}
+
+int main(int argc, char *argv[])
+{
+     int i=0,n;
+     top=NULL;
+     start=NULL;
+     printf(" \n1. Push to stack");
+     printf(" \n2. Pop from Stack");
+     printf(" \n3. Display data of Stack");
+     printf(" \n4. Exit\n");
+     while(1)
+     {
+          printf(" \nChoose Option: ");
+          scanf("%d",&i);
+          switch(i)
+          {
+               case 1:
+               {
+               int value;
+               printf("\nEnter a valueber to push into Stack: ");
+               scanf("%d",&value);
+               push(value);
+               display();
+               break;
+               }
+               case 2:
+               {
+               n=count();
+               printf("%d",n);
+               if(n==1)
+                popStack();
+               else
+               popStack2(n/2);
+               display();
+               break;
+               }
+               case 3:
+               {
+               display();
+               break;
+               }
+               case 4:
+               {
+               struct Node *temp;
+               while(top!=NULL)
+               {
+                    temp = top->next;
+                    free(top);
+                    top=temp;
+               }
+               exit(0);
+               }
+               default:
+               {
+               printf("\nwrong choice for operation");
+               }
+         }
+    }
+}
