@@ -80,7 +80,7 @@ void tof()
  c=getch();
  c1=getch();
  if(c==0&&c1==75)
-  int main();
+   main();
 }
 void disp()
 {
@@ -98,7 +98,7 @@ void disp()
  c=getch();
  c1=getch();
  if(c==0&&c1==75)
-int  main();
+  main();
 }
 void linklst()
 {
@@ -214,7 +214,7 @@ void search()
  g=getch();
  g2=getch();
  if(g==0&&g2==75)
-int   main();
+  main();
 }
 void stats()
 {
