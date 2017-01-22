@@ -1,3 +1,4 @@
+// coded by Dikshant Agarwal
 #include<stdio.h>
 #include<conio.h>
 #include<stdlib.h>
@@ -19,7 +20,6 @@ void formin()
 {
  char c;
  int ag;
-// clrscr();
  printf("Name: ");
  fflush(stdin);
  gets(a.name);
@@ -223,7 +223,6 @@ void stats()
 int main()
 {
  int n;
-// clrscr();
  linklst();
  while(n!=5)
  {
